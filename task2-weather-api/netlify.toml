@@ -1,0 +1,9 @@
+[build]
+  base = "task2-weather-api"
+  publish = "build"
+  command = "npm run build"
+
+[context.production.environment]
+  REACT_APP_WEATHER_API_KEY = "551da7404a2eeb5735e0f351fc0b85fc"
+  REACT_APP_WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather"
+  CI = "false"

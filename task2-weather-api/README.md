@@ -2,14 +2,15 @@
 
 ## 📋 Project Overview
 
-A dynamic weather application that integrates with the OpenWeatherMap REST API to fetch and display real-time weather data. Built as part of the Codveda Technology Level 2 Internship program, this project demonstrates API integration, debounced search, error handling, and responsive design.
+A dynamic weather application that integrates with the OpenWeatherMap REST API to fetch and display real-time weather data. Built as part of the Codveda Technology Level 2 Internship program, this project demonstrates API integration, debounced search, geolocation support, error handling, and responsive design.
 
 ## ✨ Features
 
 - **Real-Time Weather Data**: Fetches current weather information from OpenWeatherMap API
+- **Geolocation Support**: Instantly fetch weather for your current location with a single click
 - **Debounced Search**: Optimized search with 800ms delay to reduce API calls
 - **Dynamic Content**: Weather data updates based on user input
-- **Error Handling**: Graceful error messages for invalid cities or API failures
+- **Error Handling**: Graceful error messages for invalid cities, permission denials, or API failures
 - **Loading States**: Visual feedback during data fetching
 - **Comprehensive Weather Info**: Temperature, humidity, wind speed, pressure, visibility
 - **Sunrise/Sunset Times**: Formatted local time display
@@ -20,6 +21,7 @@ A dynamic weather application that integrates with the OpenWeatherMap REST API t
 
 - **React 18**: Modern React with Hooks
 - **OpenWeatherMap API**: REST API for weather data
+- **Geolocation API**: Browser native API for location services
 - **Fetch API**: For making HTTP requests
 - **Tailwind CSS**: Utility-first CSS framework
 - **Lucide React**: Icon library for UI elements

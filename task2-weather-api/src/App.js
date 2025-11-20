@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, MapPin, Cloud, Wind, Droplets, Eye, Gauge, Sunrise, Sunset, Loader, AlertCircle } from 'lucide-react';
+import { Search, MapPin, Cloud, Wind, Droplets, Eye, Gauge, Sunrise, Sunset, Loader, AlertCircle, Navigation } from 'lucide-react';
 
 const WeatherApp = () => {
   const [city, setCity] = useState('');
@@ -30,9 +30,10 @@ const WeatherApp = () => {
     setSearchTimeout(timeout);
   };
 
+  // Fetch by City Name
   const fetchWeather = async (searchCity) => {
     try {
-      const API_KEY = 'demo'; // Using demo mode for OpenWeatherMap
+      const API_KEY = process.env.REACT_APP_WEATHER_API_KEY; // Fixed: Now using .env variable
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}&units=metric`
       );
@@ -49,6 +50,52 @@ const WeatherApp = () => {
       setWeatherData(null);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // NEW: Fetch by Coordinates (Location Button)
+  const fetchWeatherByLocation = async (lat, lon) => {
+    try {
+      setLoading(true);
+      setError('');
+      const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+      
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+      );
+
+      if (!response.ok) {
+        throw new Error('Unable to fetch weather for your location');
+      }
+
+      const data = await response.json();
+      setWeatherData(data);
+      setCity(data.name); // Updates the search bar with the detected city name
+      setError('');
+    } catch (err) {
+      setError(err.message || 'Failed to fetch weather data');
+      setWeatherData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // NEW: Handle Location Button Click
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      setLoading(true);
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchWeatherByLocation(latitude, longitude);
+        },
+        (err) => {
+          setLoading(false);
+          setError("Location access denied. Please enable permissions.");
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
     }
   };
 
@@ -87,6 +134,8 @@ const WeatherApp = () => {
         </div>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 md:p-8 shadow-2xl border border-white/20">
+          
+          {/* Updated Search Bar with Location Button */}
           <div className="relative mb-8">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <Search className="text-blue-200" size={20} />
@@ -95,9 +144,16 @@ const WeatherApp = () => {
               type="text"
               value={city}
               onChange={handleInputChange}
-              placeholder="Enter city name (e.g., London, Paris, Tokyo)..."
-              className="w-full pl-12 pr-4 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+              placeholder="Enter city name (e.g., London)..."
+              className="w-full pl-12 pr-12 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
             />
+            <button
+              onClick={handleLocationClick}
+              className="absolute inset-y-0 right-0 pr-4 flex items-center text-blue-200 hover:text-white transition-colors"
+              title="Use my location"
+            >
+              <Navigation size={20} />
+            </button>
           </div>
 
           {loading && (
@@ -210,7 +266,7 @@ const WeatherApp = () => {
           {!weatherData && !loading && !error && (
             <div className="text-center py-12">
               <Cloud className="mx-auto text-white/50 mb-4" size={64} />
-              <p className="text-white text-lg">Enter a city name to get weather information</p>
+              <p className="text-white text-lg">Enter a city name or check your location</p>
             </div>
           )}
         </div>

@@ -227,13 +227,13 @@ Through these projects, I gained hands-on experience with:
 ## 📸 Screenshots
 
 ### Task 1: Single Page Application
-![SPA Screenshot](./screenshots/spa-home.png)
+![SPA Screenshot](./Screenshots/1.png)
 
 ### Task 2: Weather Application
-![Weather App Screenshot](./screenshots/weather-app.png)
+![Weather App Screenshot](./Screenshots/2.png)
 
 ### Task 3: E-commerce UI
-![E-commerce UI Screenshot](./screenshots/ecommerce-ui.png)
+![E-commerce UI Screenshot](./Screenshots/3.png)
 
 ## 🚀 Deployment Instructions
 

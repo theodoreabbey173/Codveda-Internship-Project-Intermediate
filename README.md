@@ -123,6 +123,10 @@ npm start
 
 ```
 Codveda-Internship-Project-Intermediate/
+├── Screenshots/
+│    ├── 1
+│    ├── 2  
+│    ├── 3
 ├── task1-spa/
 │   ├── src/
 │   ├── public/

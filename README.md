@@ -221,7 +221,7 @@ Through these projects, I gained hands-on experience with:
 | Project | Live Demo | Source Code |
 |---------|-----------|-------------|
 | Task 1 - SPA | [Demo Link](https://task1-spa.netlify.app/) | [View Code](./task1-spa) |
-| Task 2 - Weather API | [Demo Link](#) | [View Code](./task2-weather-api) |
+| Task 2 - Weather API | [Demo Link](https://task2-weather-api.netlify.app/) | [View Code](./task2-weather-api) |
 | Task 3 - E-commerce UI | [Demo Link](https://task3-ecommerce-ui.netlify.app/) | [View Code](./task3-ecommerce-ui) |
 
 ## 📸 Screenshots
